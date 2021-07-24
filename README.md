@@ -13,16 +13,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/vijayanandof/Tic-Tac-Toe-React/">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">Tic Tac Toe App</h3>
 
   <p align="center">
     Tic Tac Toe Game, a React JS approach.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs</strong></a>
+    <a href="https://github.com/vijayanandof/Tic-Tac-Toe-React/"><strong>Explore the docs</strong></a>
     <br />
   </p>
 </p>
@@ -35,9 +31,9 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <a href="#assumptions">Assumptions</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#assumptions">Assumptions</a></li>
       </ul>
     </li>
     <li>
@@ -56,17 +52,17 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## Assumptions
-Assumptions made.
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
+### About The Project
 Tic Tac Toe Game, a react JS approach.
-
 
 ### Built With
 
 * [React](https://reactjs.org/)
+
+<!-- ABOUT THE PROJECT -->
+### Assumptions
+
+Assumptions made.
 
 
 <!-- GETTING STARTED -->
@@ -89,10 +85,10 @@ To get a local copy up and running follow these simple steps.
    ```
 3. In the project directory, you can run:
 
-### `yarn start`
+    ### `yarn start`
 
-  Runs the app in the development mode.\
-  Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    Runs the app in the development mode.\
+    Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 4. Refer tic-tac-toe-app\README.md further.
 
