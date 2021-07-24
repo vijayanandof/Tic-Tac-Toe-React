@@ -13,7 +13,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/vijayanandof/Tic-Tac-Toe-React/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -22,7 +22,7 @@
   <p align="center">
     Tic Tac Toe Game, a React JS approach.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs</strong></a>
     <br />
   </p>
 </p>
@@ -35,6 +35,7 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
+      <a href="#assumptions">Assumptions</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -46,7 +47,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -56,16 +56,17 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Assumptions
+Assumptions made.
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-Tic Tac Toe Game, a react JS approach. 
+<!-- ABOUT THE PROJECT -->
+## About The Project
+Tic Tac Toe Game, a react JS approach.
 
 
 ### Built With
 
 * [React](https://reactjs.org/)
-
 
 
 <!-- GETTING STARTED -->
@@ -74,81 +75,37 @@ Tic Tac Toe Game, a react JS approach.
 To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+1. NodeJS - NPM
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/vijayanandof/Tic-Tac-Toe-React.git
    ```
 2. Install NPM packages
    ```sh
    npm install
    ```
+3. In the project directory, you can run:
 
+### `yarn start`
 
+  Runs the app in the development mode.\
+  Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
+4. Refer tic-tac-toe-app\README.md further.
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
-
 <!-- CONTACT -->
 ## Contact
 
-vijayanand - [@twitter_handle](https://twitter.com/vijayanandof)
-
+vijayanand - [@vijayanandof](https://twitter.com/vijayanandof)
 Project Link: [https://github.com/vijayanandof/Tic-Tac-Toe-React](https://github.com/vijayanandof/Tic-Tac-Toe-React)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* []()
-* []()
-* []()
-
-
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
