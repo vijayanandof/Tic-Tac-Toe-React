@@ -1,206 +1,211 @@
-import React from "react"
+import React from "react";
 import { Modal } from "react-bootstrap";
 
 export class MasterForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       currentStep: 1,
-      playMode:  "1",
-      playerX: '',
-      player0: '',
-      formState: true
-    }
+      playMode: "1",
+      playerX: "",
+      player0: "",
+      formState: true,
+    };
   }
 
-  handleChange = event => {
-    const {name, value} = event.target
+  handleChange = (event) => {
+    const { name, value } = event.target;
     this.setState({
-      [name]: value
-    })    
-  }
-   
-  handleSubmit = event => {
-    event.preventDefault()
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { playMode, playerX, player0 } = this.state;
     this.handleCloseForm();
-    localStorage.setItem('playMode', playMode);
-    localStorage.setItem('playerX', playerX);
-    localStorage.setItem('player0', player0);
-    alert(`Your registration detail: \n 
-           playMode: ${playMode} \n 
-           playerX: ${playerX} \n
-           player0: ${player0} \n`)
-  }
-  
+    sessionStorage.setItem("playMode", playMode);
+    sessionStorage.setItem("playerX", playerX);
+    sessionStorage.setItem("player0", player0);
+  };
+
   _next = () => {
-    let currentStep = this.state.currentStep
-    currentStep = currentStep >= 2? 3: currentStep + 1
+    let currentStep = this.state.currentStep;
+    currentStep = currentStep >= 2 ? 3 : currentStep + 1;
     this.setState({
-      currentStep: currentStep
-    })
-  }
-    
+      currentStep: currentStep,
+    });
+  };
+
   _prev = () => {
-    let currentStep = this.state.currentStep
-    currentStep = currentStep <= 1? 1: currentStep - 1
+    let currentStep = this.state.currentStep;
+    currentStep = currentStep <= 1 ? 1 : currentStep - 1;
     this.setState({
-      currentStep: currentStep
-    })
+      currentStep: currentStep,
+    });
+  };
+
+  /*
+   * the functions for our button
+   */
+  previousButton() {
+    let currentStep = this.state.currentStep;
+    if (currentStep !== 1) {
+      return (
+        <button
+          className="btn btn-secondary spacing-left"
+          type="button"
+          onClick={this._prev}
+        >
+          Previous
+        </button>
+      );
+    }
+    return null;
   }
 
-/*
-* the functions for our button
-*/
-previousButton() {
-  let currentStep = this.state.currentStep;
-  if(currentStep !==1){
-    return (
-      <button 
-        className="btn btn-secondary float-right" 
-        type="button" onClick={this._prev}>
-      Previous
-      </button>
-    )
+  nextButton() {
+    let currentStep = this.state.currentStep;
+    if (currentStep < 2) {
+      return (
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={this._next}
+        >
+          Next
+        </button>
+      );
+    }
+    return null;
   }
-  return null;
-}
 
-nextButton(){
-  let currentStep = this.state.currentStep;
-  if(currentStep <2){
-    return (
-      <button 
-        className="btn btn-primary float-right" 
-        type="button" onClick={this._next}>
-      Next
-      </button>        
-    )
-  }
-  return null;
-}
-
-handleCloseForm(){
+  handleCloseForm = () => {
     this.setState({
-        formState: false
-      })
-}
-  
-  render() {    
+      formState: false,
+    });
+  }
+
+  render() {
     return (
       <>
-        <Modal
-        show={this.state.formState}
-        onHide={this.handleCloseForm}
-        >
-        <Modal.Header>
-          <Modal.Title>Input</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-      <p>Step {this.state.currentStep} </p> 
-
-      <form onSubmit={this.handleSubmit}>
-      {/* 
-        render the form steps and pass required props in
-      */}
-        <Step1 
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          playMode={this.state.playMode}
-        />
-        <Step2 
-          currentStep={this.state.currentStep} 
-          playMode={this.state.playMode}
-          handleChange={this.handleChange}
-          playerX={this.state.playerX}
-        />
-        {this.previousButton()}
-        {this.nextButton()}
-
-      </form>
-      </Modal.Body>
-      </Modal>
+        <Modal show={this.state.formState} onHide={this.handleCloseForm} backdrop="static">
+          <Modal.Header>
+            <Modal.Title>Let's play a Tic-Tac-Toe Game.</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <b>Step {this.state.currentStep} of 2: </b>
+            <br></br>
+            <br></br>
+            <form onSubmit={this.handleSubmit}>
+              <Step1
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                playMode={this.state.playMode}
+              />
+              <Step2
+                currentStep={this.state.currentStep}
+                playMode={this.state.playMode}
+                handleChange={this.handleChange}
+                playerX={this.state.playerX}
+              />
+              {this.previousButton()}
+              {this.nextButton()}
+            </form>
+          </Modal.Body>
+        </Modal>
       </>
     );
   }
 }
 
 function Step1(props) {
-    console.log(props)
+  console.log(props);
   if (props.currentStep !== 1) {
-    return null
-  } 
-  return(
+    return null;
+  }
+  return (
     <div className="form-group">
-      <label htmlFor="playMode">Select Game Mode: </label>
-      <select className="form-select" aria-label="Choose a game mode:"
-        onChange={props.handleChange} value={props.playMode} id="playMode"
-        name="playMode">
-        <option defaultValue value="1">2 Players</option>
-        <option value="2">VS Computer</option>
-        </select>
-        <br></br>
+      <label htmlFor="playMode">Choose a Game Mode: </label>
+      <select
+        className="form-select"
+        aria-label="Choose a game mode:"
+        onChange={props.handleChange}
+        value={props.playMode}
+        id="playMode"
+        name="playMode"
+      >
+        <option defaultValue value="1">
+          2 Players (Default)
+        </option>
+        <option value="2">Vs Computer</option>
+      </select>
+      <br></br>
     </div>
   );
 }
 
 function Step2(props) {
-    console.log(props);
+  console.log(props);
   if (props.currentStep !== 2) {
-    return null
-  } 
+    return null;
+  }
   console.log(props.playMode);
   if (props.playMode === "2") {
-      console.log(props.playMode)
-    return(
-        <>
+    console.log(props.playMode);
+    return (
+      <>
         <div className="form-group">
-          <label htmlFor="playerX">playerX</label>
+          <label htmlFor="playerX">Enter Name of player(X):</label>
           <input
             className="form-control"
             id="playerX"
             name="playerX"
             type="text"
-            placeholder="Enter playerX"
+            placeholder="(X)"
             value={props.playerX}
             onChange={props.handleChange}
             required
-            />
-            <br></br>
+          />
+          <br></br>
         </div>
-        <button className="btn btn-success btn-block float-right">Start Game!</button>
-        </>
-      );
-  }else if (props.playMode === "1") {
-    return(
-        <>
+        <button className="btn btn-success btn-block float-right">
+          Start Game!
+        </button>
+      </>
+    );
+  } else if (props.playMode === "1") {
+    return (
+      <>
         <div className="form-group">
-          <label htmlFor="playerX">playerX</label>
+          <label htmlFor="playerX">Enter Name of player(X):</label>
           <input
             className="form-control"
             id="playerX"
             name="playerX"
             type="text"
-            placeholder="Enter playerX"
+            placeholder="(X)"
             value={props.playerX}
             onChange={props.handleChange}
             required
-            />
-        <label htmlFor="player0">player0</label>
+          />
+          <label htmlFor="player0">Enter Name of player(0):</label>
           <input
             className="form-control"
             id="player0"
             name="player0"
             type="text"
-            placeholder="Enter player0"
+            placeholder="(0)"
             value={props.player0}
             onChange={props.handleChange}
             required
-            />
-            <br></br>
+          />
+          <br></br>
         </div>
-        <button className="btn btn-success btn-block float-right">Start Game!</button>
-        </>
-      );
+        <button className="btn btn-success btn-block float-right">
+          Start Game!
+        </button>
+      </>
+    );
   }
 }

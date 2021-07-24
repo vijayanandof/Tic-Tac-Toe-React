@@ -15,6 +15,7 @@ function Game() {
   const handleClose = () => {
     setShow(false);
     clearGame();
+    sessionStorage.clear();
     window.location.reload();
   };
 
@@ -90,22 +91,13 @@ function Game() {
         </div>
         <br></br>
         <h3 className="player">
-          Player :{" "}
-          {isXChance
-            ? "X :" + localStorage.getItem("playerX")
-            : "0 :" + localStorage.getItem("player0")}
+          Player :{getCurrentChance(isXChance)}
           's turn now.
         </h3>
         <ShowWinner
           show={show}
           onHide={handleClose}
-          title={
-            winner === "Draw"
-              ? "Game Draw."
-              : (winner === "X"
-                  ? "X " + localStorage.getItem("playerX")
-                  : "Y " + localStorage.getItem("player0")) + " Player Won."
-          }
+          title={getTitle()}
           body="Cool! Close to restart the Game."
         ></ShowWinner>
         <br></br>
@@ -113,6 +105,24 @@ function Game() {
       </div>
     </>
   );
+
+  function getTitle() {
+    if (winner === "Draw") {
+      return "Game Draw.";
+    } else{
+      return (
+        winner === "X"
+          ? sessionStorage.getItem("playerX") + " Player (X) Won."
+          : sessionStorage.getItem("player0") + " Player (0) Won."
+      );
+    }
+
+  }
+
+  function getCurrentChance(isXChance) {
+    return isXChance ? "X" : "0";
+  }
+  
 }
 
 export default Game;

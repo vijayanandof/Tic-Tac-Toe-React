@@ -4,7 +4,6 @@
     grid-template-rows: repeat(3, 100px);
     grid-template-columns: repeat(3, 100px);
     grid-gap: 5px;
-    /* grid-template:  repeat(3, 100px)/ repeat(3, 100px); */
     width: 300px;
     height: 300px;
   }
@@ -26,7 +25,11 @@
     font-size: xx-large;
     font-weight: bolder;
     color: white;
-    border-radius: 10px;
+    border-radius: 15px;
+  }
+
+  .spacing-left {
+    margin-left: 15px;
   }
   
   .squarebox:hover{
