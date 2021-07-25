@@ -19,13 +19,15 @@
 }
 
 .squarebox {
-  border: 2px solid #52a0ee;
+  border: 2px solid #6eb2f7;
   padding: 25px;
   text-align: center;
   font-size: xx-large;
   font-weight: bolder;
   color: white;
   border-radius: 15px;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
 }
 
 .spacing-left {
@@ -34,12 +36,14 @@
 
 .squarebox:hover {
   background-color: #404caf;
+  border-radius: 10%;
+  border: 5px solid #52a0ee;
 }
 
 .App {
   height: auto;
   text-align: center;
-  padding: 80px;
+  padding: 40px;
   padding-top: 57px;
   display: block;
   border: white 2px solid;

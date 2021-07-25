@@ -4,9 +4,10 @@ import { checkWinner } from "../utils/checkWinner";
 import { Button } from "react-bootstrap";
 import ShowWinner from "./ShowWinner";
 import { MasterForm } from "./MasterForm";
+import { minimax } from "../utils/computerPlayer";
 
 /* Inital Game states */
-const initialState = ["", "", "", "", "", "", "", "", "", ""];
+const initialState = Array.from(Array(9).keys());
 let winner = "";
 
 /**
@@ -37,7 +38,8 @@ function Game() {
 
   function onSquareClicked(index) {
     let strings = Array.from(gameState);
-    if (strings[index]) return;
+    console.log(strings);
+    if (typeof strings[index] !== "number") return;
     strings[index] = getCurrentChance(isXChance);
     updateIsXChance(!isXChance);
     updateGameState(strings);
@@ -72,6 +74,18 @@ function Game() {
       handleWinnerModalShow();
     }
   }, [gameState]);
+
+  // Hook for isXChance change
+  useEffect(() => {
+    if (!isXChance && sessionStorage.getItem("player0") === "Computer") {
+      // console.log(minimax(gameState, "0"));
+      console.log(gameState, 0);
+      let strings = Array.from(gameState);
+      strings[minimax(gameState, "0").index] = getCurrentChance(isXChance);
+      updateGameState(strings);
+      updateIsXChance(!isXChance);
+    }
+  }, [isXChance, gameState]);
 
   return (
     <>
@@ -135,13 +149,16 @@ function Game() {
   );
 
   function getWinnerModalBody() {
-    return (
-      (winner === "X"
-        ? "Player2(Y) " + sessionStorage.getItem("player0")
-        : "Player1(X) " + sessionStorage.getItem("playerX")) +
-      ". Better luck next time."
-    );
+    if (winner === "Draw") {
+      return "Close to try again.";
+    } else {
+      return (
+        (winner === "X"
+          ? "Player2(Y) " + sessionStorage.getItem("player0")
+          : "Player1(X) " + sessionStorage.getItem("playerX")) +
+        ". Better luck next time."
+      );
+    }
   }
 }
-
 export default Game;

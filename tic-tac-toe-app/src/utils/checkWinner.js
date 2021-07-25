@@ -1,5 +1,4 @@
-export function checkWinner(gameState) {
-  const lines = [
+export const winCombos = [
     [0, 1, 2], // rows
     [3, 4, 5],
     [6, 7, 8],
@@ -9,9 +8,11 @@ export function checkWinner(gameState) {
     [0, 4, 8], // diagnols
     [2, 4, 6],
   ];
+
+export function checkWinner(gameState) {
   console.debug("checkWinner: ", gameState[0], gameState[1], gameState[2]);
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
+  for (let i = 0; i < winCombos.length; i++) {
+    const [a, b, c] = winCombos[i];
     if (
       gameState[a] &&
       gameState[a] === gameState[b] &&
@@ -25,7 +26,7 @@ export function checkWinner(gameState) {
 }
 
 function checkForDraw(gameState) {
-  if (gameState.filter(Boolean).length === 9) {
+  if (gameState.filter(s => typeof s === 'string').length === 9) {
     return true;
   }
 }

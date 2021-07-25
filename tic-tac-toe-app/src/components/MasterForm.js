@@ -28,6 +28,13 @@ export class MasterForm extends React.Component {
     this.setState({
       [name]: value,
     });
+
+    // Vs Computer state
+    if(name === 'playMode' && value ==="2"){
+      this.setState({
+        player0: "Computer",
+      });
+    }
   };
 
   handleSubmit = (event) => {
@@ -145,7 +152,7 @@ function Step1(props) {
         <option defaultValue value="1">
           2 Players (Default)
         </option>
-        <option value="2" disabled>Vs Computer (Work in progress)</option>
+        <option value="2">Vs Computer</option>
       </select>
       <br></br>
     </div>
@@ -157,9 +164,6 @@ function Step2(props) {
     return null;
   }
   if (props.playMode === "2") {
-    //TODO: Should remove after building Vs computer mode
-    alert("Work in progress for 'VS Computer mode'. Reloading Game.");
-    window.location.reload();
     return (
       <>
         <div className="form-group">
