@@ -1,47 +1,75 @@
 import { useEffect, useState } from "react";
-import Square from "./square";
+import Square from "./Square";
 import { checkWinner } from "../utils/checkWinner";
 import { Button } from "react-bootstrap";
-import ShowWinner from "../utils/ShowWinner";
-import { MasterForm } from "../utils/MasterForm";
+import ShowWinner from "./ShowWinner";
+import { MasterForm } from "./MasterForm";
 
-const clearState = ["", "", "", "", "", "", "", "", "", ""];
-let winner = null;
+/* Inital Game states */
+const initialState = ["", "", "", "", "", "", "", "", "", ""];
+let winner = "";
+
+/**
+ * Game Component holds
+ * Board, Square, Masterform, ShowWinner comps
+ * and does state handling.
+ *
+ * @returns <Game/>
+ */
 function Game() {
-  const [gameState, updateGameState] = useState(clearState);
+  const [gameState, updateGameState] = useState(initialState);
   const [isXChance, updateIsXChance] = useState(true);
-  const [show, setShow] = useState(false);
+  const [showWinnerModal, setShowWinnerModalState] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
+  /**
+   *  Modal and state handling.
+   */
+  const handleWinnerModalClose = () => {
+    setShowWinnerModalState(false);
     clearGame();
     sessionStorage.clear();
     window.location.reload();
   };
 
-  const handleShow = () => {
-    setShow(true);
+  const handleWinnerModalShow = () => {
+    setShowWinnerModalState(true);
   };
 
-  function onUserClicked(index) {
-    console.log(index);
-    console.log(gameState);
+  function onSquareClicked(index) {
     let strings = Array.from(gameState);
     if (strings[index]) return;
-    strings[index] = isXChance ? "X" : "0";
+    strings[index] = getCurrentChance(isXChance);
     updateIsXChance(!isXChance);
     updateGameState(strings);
   }
 
   const clearGame = () => {
     updateIsXChance(true);
-    updateGameState(clearState);
+    updateGameState(initialState);
   };
 
+  function getTitleForModal() {
+    if (winner === "Draw") {
+      return "Game Draw.";
+    } else {
+      return (
+        "Woohoo!! " +
+        (winner === "X"
+          ? "Player1 (X) - " + sessionStorage.getItem("playerX") + " Won."
+          : "Player2 (0) - " + sessionStorage.getItem("player0") + " Won.")
+      );
+    }
+  }
+
+  function getCurrentChance(isXChance) {
+    return isXChance ? "X" : "0";
+  }
+
+  // Hook for gameState change
   useEffect(() => {
     winner = checkWinner(gameState);
     if (winner) {
-      handleShow();
+      handleWinnerModalShow();
     }
   }, [gameState]);
 
@@ -50,42 +78,42 @@ function Game() {
       <div className="App">
         <h1 className="header">Tic Tac Toe</h1>
         <br></br>
-        <MasterForm></MasterForm>
+        <MasterForm />
         <div className="game-container">
           <Square
-            onClick={() => onUserClicked(0)}
+            onClick={() => onSquareClicked(0)}
             state={gameState[0]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(1)}
+            onClick={() => onSquareClicked(1)}
             state={gameState[1]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(2)}
+            onClick={() => onSquareClicked(2)}
             state={gameState[2]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(3)}
+            onClick={() => onSquareClicked(3)}
             state={gameState[3]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(4)}
+            onClick={() => onSquareClicked(4)}
             state={gameState[4]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(5)}
+            onClick={() => onSquareClicked(5)}
             state={gameState[5]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(6)}
+            onClick={() => onSquareClicked(6)}
             state={gameState[6]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(7)}
+            onClick={() => onSquareClicked(7)}
             state={gameState[7]}
           ></Square>
           <Square
-            onClick={() => onUserClicked(8)}
+            onClick={() => onSquareClicked(8)}
             state={gameState[8]}
           ></Square>
         </div>
@@ -95,34 +123,25 @@ function Game() {
           's turn now.
         </h3>
         <ShowWinner
-          show={show}
-          onHide={handleClose}
-          title={getTitle()}
-          body="Cool! Close to restart the Game."
+          show={showWinnerModal}
+          onHide={handleWinnerModalClose}
+          title={getTitleForModal()}
+          body={getWinnerModalBody()}
         ></ShowWinner>
         <br></br>
-        <Button onClick={() => clearGame()}>Restart ?</Button>
+        <Button onClick={() => clearGame()}>Clear grid</Button>
       </div>
     </>
   );
 
-  function getTitle() {
-    if (winner === "Draw") {
-      return "Game Draw.";
-    } else{
-      return (
-        winner === "X"
-          ? sessionStorage.getItem("playerX") + " Player (X) Won."
-          : sessionStorage.getItem("player0") + " Player (0) Won."
-      );
-    }
-
+  function getWinnerModalBody() {
+    return (
+      (winner === "X"
+        ? "Player2(Y) " + sessionStorage.getItem("player0")
+        : "Player1(X) " + sessionStorage.getItem("playerX")) +
+      ". Better luck next time."
+    );
   }
-
-  function getCurrentChance(isXChance) {
-    return isXChance ? "X" : "0";
-  }
-  
 }
 
 export default Game;

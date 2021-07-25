@@ -45,7 +45,6 @@
     </li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -58,11 +57,21 @@ Tic Tac Toe Game, a react JS approach.
 ### Built With
 
 * [React](https://reactjs.org/)
+* [React-Bootstrap](https://react-bootstrap.github.io/)
 
 <!-- ABOUT THE PROJECT -->
 ### Assumptions
 
-Assumptions made.
+1. Assume to use ReactJS Hooks & functional components
+2. User doesn't want to maintain state on page refresh.
+3. Primary browser as Chrome - tested.
+4. After completion of Game, user data is cleared and new Game starts.
+5. Game will be played in browser full screeen. Not responsive. Media queries not added.
+6. Only 2 player mode supported in "1.0 release" as per Part A - Building 'Vs Computer' mode.
+7. Have Written tests to ensure Game component rendering and Winner checking core logic.
+8. Would like to write Cypress JS for e2e testing. Not written yet.
+9. Playername are mandatory/required validation added.
+10. Cannot dismiss modal, with keyboard or user click, as user inputs are mandatory for Game State.
 
 
 <!-- GETTING STARTED -->
@@ -71,7 +80,9 @@ Assumptions made.
 To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
-1. NodeJS - NPM
+1. NodeJS - NPM/yarn
+2. React - Bootstrap
+3. HTML, CSS, Js
 
 ### Installation
 

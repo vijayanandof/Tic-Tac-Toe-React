@@ -8,6 +8,8 @@ function ShowWinner(props) {
         onHide={() => {
           props.onHide();
         }}
+        backdrop="static"
+        keyboard={false}
       >
         <Modal.Header closeButton>
           <Modal.Title>{props.title}</Modal.Title>

@@ -1,6 +1,16 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 
+/**
+ * Multi-step form for getting 2 inputs
+ * 1. Game Mode 
+ * 2. Player Names
+ *
+ * @export
+ * @class MasterForm
+ * @extends {React.Component}
+ * @returns <MasterForm/>
+ */
 export class MasterForm extends React.Component {
   constructor(props) {
     super(props);
@@ -45,9 +55,6 @@ export class MasterForm extends React.Component {
     });
   };
 
-  /*
-   * the functions for our button
-   */
   previousButton() {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
@@ -68,11 +75,7 @@ export class MasterForm extends React.Component {
     let currentStep = this.state.currentStep;
     if (currentStep < 2) {
       return (
-        <button
-          className="btn btn-primary"
-          type="button"
-          onClick={this._next}
-        >
+        <button className="btn btn-primary" type="button" onClick={this._next}>
           Next
         </button>
       );
@@ -84,12 +87,17 @@ export class MasterForm extends React.Component {
     this.setState({
       formState: false,
     });
-  }
+  };
 
   render() {
     return (
       <>
-        <Modal show={this.state.formState} onHide={this.handleCloseForm} backdrop="static">
+        <Modal
+          show={this.state.formState}
+          onHide={this.handleCloseForm}
+          backdrop="static"
+          keyboard={false}
+        >
           <Modal.Header>
             <Modal.Title>Let's play a Tic-Tac-Toe Game.</Modal.Title>
           </Modal.Header>
@@ -120,7 +128,6 @@ export class MasterForm extends React.Component {
 }
 
 function Step1(props) {
-  console.log(props);
   if (props.currentStep !== 1) {
     return null;
   }
@@ -138,7 +145,7 @@ function Step1(props) {
         <option defaultValue value="1">
           2 Players (Default)
         </option>
-        <option value="2">Vs Computer</option>
+        <option value="2" disabled>Vs Computer (Work in progress)</option>
       </select>
       <br></br>
     </div>
@@ -146,17 +153,17 @@ function Step1(props) {
 }
 
 function Step2(props) {
-  console.log(props);
   if (props.currentStep !== 2) {
     return null;
   }
-  console.log(props.playMode);
   if (props.playMode === "2") {
-    console.log(props.playMode);
+    //TODO: Should remove after building Vs computer mode
+    alert("Work in progress for 'VS Computer mode'. Reloading Game.");
+    window.location.reload();
     return (
       <>
         <div className="form-group">
-          <label htmlFor="playerX">Enter Name of player(X):</label>
+          <label htmlFor="playerX">Enter name of Player 1(X):</label>
           <input
             className="form-control"
             id="playerX"
@@ -178,7 +185,7 @@ function Step2(props) {
     return (
       <>
         <div className="form-group">
-          <label htmlFor="playerX">Enter Name of player(X):</label>
+          <label htmlFor="playerX">Enter name of Player 1(X):</label>
           <input
             className="form-control"
             id="playerX"
@@ -189,7 +196,7 @@ function Step2(props) {
             onChange={props.handleChange}
             required
           />
-          <label htmlFor="player0">Enter Name of player(0):</label>
+          <label htmlFor="player0">Enter name of Player 2(0):</label>
           <input
             className="form-control"
             id="player0"
