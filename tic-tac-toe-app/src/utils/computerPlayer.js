@@ -3,6 +3,12 @@ import { winCombos } from "./checkWinner";
 const humanPlayer = "X";
 const aiPlayer = "0";
 
+/**
+ * Check winner with 
+ * possible game play moves
+ * @param {*} board
+ * @param {*} player
+ */
 function checkWin(board, player) {
   let plays = board.reduce((result, item, index) => (item === player ? result.concat(index) : result), []);
   let isWinner = null;
@@ -18,7 +24,14 @@ function checkWin(board, player) {
 function emptySquares(newBoard) {
   return newBoard.filter((s) => typeof s == "number");
 }
-
+/**
+ * minimax - recursive algorithm for 
+ * finding index for best move
+ * @export
+ * @param {*} newBoard
+ * @param {*} player
+ * @returns
+ */
 export function minimax(newBoard, player) {
   let availableSpots = emptySquares(newBoard);
 
@@ -29,6 +42,7 @@ export function minimax(newBoard, player) {
   } else if (availableSpots.length === 0) {
     return { score: 0 };
   }
+  
   let moves = [];
   for (let availIndex = 0; availIndex < availableSpots.length; availIndex++) {
     let move = {};
