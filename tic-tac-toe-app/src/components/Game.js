@@ -38,7 +38,6 @@ function Game() {
 
   function onSquareClicked(index) {
     let strings = Array.from(gameState);
-    console.log(strings);
     if (typeof strings[index] !== "number") return;
     strings[index] = getCurrentChance(isXChance);
     updateIsXChance(!isXChance);
@@ -78,8 +77,6 @@ function Game() {
   // Hook for isXChance change
   useEffect(() => {
     if (!isXChance && sessionStorage.getItem("player0") === "Computer") {
-      // console.log(minimax(gameState, "0"));
-      console.log(gameState, 0);
       let strings = Array.from(gameState);
       strings[minimax(gameState, "0").index] = getCurrentChance(isXChance);
       updateGameState(strings);
