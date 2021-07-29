@@ -4,15 +4,15 @@ const humanPlayer = "X";
 const aiPlayer = "0";
 
 function checkWin(board, player) {
-  let plays = board.reduce((a, e, i) => (e === player ? a.concat(i) : a), []);
-  let gameWon = null;
+  let plays = board.reduce((result, item, index) => (item === player ? result.concat(index) : result), []);
+  let isWinner = null;
   for (let [index, win] of winCombos.entries()) {
     if (win.every((elem) => plays.indexOf(elem) > -1)) {
-      gameWon = { index: index, player: player };
+      isWinner = { index: index, player: player };
       break;
     }
   }
-  return gameWon;
+  return isWinner;
 }
 
 function emptySquares(newBoard) {
@@ -20,20 +20,20 @@ function emptySquares(newBoard) {
 }
 
 export function minimax(newBoard, player) {
-  var availSpots = emptySquares(newBoard);
+  let availableSpots = emptySquares(newBoard);
 
   if (checkWin(newBoard, humanPlayer)) {
     return { score: -10 };
   } else if (checkWin(newBoard, aiPlayer)) {
     return { score: 10 };
-  } else if (availSpots.length === 0) {
+  } else if (availableSpots.length === 0) {
     return { score: 0 };
   }
-  var moves = [];
-  for (var i = 0; i < availSpots.length; i++) {
-    var move = {};
-    move.index = newBoard[availSpots[i]];
-    newBoard[availSpots[i]] = player;
+  let moves = [];
+  for (let availIndex = 0; availIndex < availableSpots.length; availIndex++) {
+    let move = {};
+    move.index = newBoard[availableSpots[availIndex]];
+    newBoard[availableSpots[availIndex]] = player;
 
     if (player === aiPlayer) {
       let result = minimax(newBoard, humanPlayer);
@@ -43,12 +43,12 @@ export function minimax(newBoard, player) {
       move.score = result.score;
     }
 
-    newBoard[availSpots[i]] = move.index;
+    newBoard[availableSpots[availIndex]] = move.index;
 
     moves.push(move);
   }
 
-  var bestMove;
+  let bestMove;
   if (player === aiPlayer) {
     let bestScore = -10000;
     for (let i = 0; i < moves.length; i++) {
