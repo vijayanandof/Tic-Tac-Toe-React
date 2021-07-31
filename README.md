@@ -62,16 +62,16 @@ Tic Tac Toe Game, a react JS approach.
 <!-- ABOUT THE PROJECT -->
 ### Assumptions
 
-1. Assume to use ReactJS Hooks & functional components
+1. Assumed to use ReactJS Hooks & functional components
 2. User doesn't want to maintain state on page refresh.
 3. Primary browser as Chrome - tested.
 4. After completion of Game, user data is cleared and new Game starts.
 5. Game will be played in browser full screeen. Not responsive. Media queries not added.
-6. Only 2 player mode supported in "1.0 release" as per Part A - Building 'Vs Computer' mode.
+6. Both 2 player and Vs Computer mode built.
 7. Have Written tests to ensure Game component rendering and Winner checking core logic.
-8. Would like to write Cypress JS for e2e testing. Not written yet.
-9. Playername are mandatory/required validation added.
-10. Cannot dismiss modal, with keyboard or user click, as user inputs are mandatory for Game State.
+8. Would like to write Cypress TC for e2e testing. Not written yet.
+9. Player name is mandatory/required. validation added.
+10. Cannot dismiss modal form for input, with keyboard or user click, as user inputs are mandatory for Game State.
 
 
 <!-- GETTING STARTED -->
