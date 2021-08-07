@@ -4,8 +4,8 @@
   grid-template-rows: repeat(3, 100px);
   grid-template-columns: repeat(3, 100px);
   grid-gap: 5px;
-  width: 300px;
-  height: 300px;
+  width: 40%;
+  justify-content: space-around;
 }
 
 .header {
@@ -46,12 +46,20 @@
   padding: 40px;
   padding-top: 57px;
   display: block;
-  border: white 2px solid;
-  margin: 50px 32%;
-  border-radius: 15px;
-  background: #000911;
+  justify-content: center;
+  align-content: center;
+  width: 30em;
+  border:#52a0ee 5px solid;
+  margin-top: 3em;
+  border-radius: 40px;
 }
 
 body {
   background-color: #1f1e1e;
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
