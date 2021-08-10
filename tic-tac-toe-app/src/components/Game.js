@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Square from "./Square";
-import { checkWinner } from "../utils/checkWinner";
+import { checkWinner, storeHistory } from "../utils/checkWinner";
 import { Button } from "react-bootstrap";
 import ShowWinner from "./ShowWinner";
 import { MasterForm } from "./MasterForm";
@@ -22,14 +22,18 @@ function Game() {
   const [isXChance, updateIsXChance] = useState(true);
   const [showWinnerModal, setShowWinnerModalState] = useState(false);
 
+  if (localStorage.getItem("history") === null) {
+    localStorage.setItem("history", JSON.stringify({ history: [] }));
+  }
+
   /**
    *  Modal and state handling.
    */
   const handleWinnerModalClose = () => {
     setShowWinnerModalState(false);
     clearGame();
-    sessionStorage.clear();
-    window.location.reload();
+    // sessionStorage.clear();
+    // window.location.reload();
   };
 
   const handleWinnerModalShow = () => {
@@ -70,6 +74,7 @@ function Game() {
   useEffect(() => {
     winner = checkWinner(gameState);
     if (winner) {
+      storeHistory(winner);
       handleWinnerModalShow();
     }
   }, [gameState]);
@@ -87,63 +92,69 @@ function Game() {
   return (
     <>
       <div className="App">
-        <h1 className="header">Tic Tac Toe</h1>
-        <br></br>
-        <MasterForm />
-        <div className="game-container">
-          <Square
-            onClick={() => onSquareClicked(0)}
-            state={gameState[0]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(1)}
-            state={gameState[1]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(2)}
-            state={gameState[2]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(3)}
-            state={gameState[3]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(4)}
-            state={gameState[4]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(5)}
-            state={gameState[5]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(6)}
-            state={gameState[6]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(7)}
-            state={gameState[7]}
-          ></Square>
-          <Square
-            onClick={() => onSquareClicked(8)}
-            state={gameState[8]}
-          ></Square>
+        <div>
+          <h1 className="header">Tic Tac Toe</h1>
+          <br></br>
+          <MasterForm />
+          <div className="game-container">
+            {Array.from(Array(9).keys()).map((number) => (
+              <Square
+                key={number}
+                onClick={() => onSquareClicked(number)}
+                state={gameState[number]}
+              ></Square>
+            ))}
+          </div>
+          <br></br>
+          <h3 className="player">
+            Player :{getCurrentChance(isXChance)}
+            's turn now.
+          </h3>
+          <ShowWinner
+            show={showWinnerModal}
+            onHide={handleWinnerModalClose}
+            title={getTitleForModal()}
+            body={getWinnerModalBody()}
+          ></ShowWinner>
+          <br></br>
+          <Button onClick={() => clearGame()}>Clear grid</Button>
         </div>
-        <br></br>
-        <h3 className="player">
-          Player :{getCurrentChance(isXChance)}
-          's turn now.
-        </h3>
-        <ShowWinner
-          show={showWinnerModal}
-          onHide={handleWinnerModalClose}
-          title={getTitleForModal()}
-          body={getWinnerModalBody()}
-        ></ShowWinner>
-        <br></br>
-        <Button onClick={() => clearGame()}>Clear grid</Button>
+        <div>
+        <div className="history">
+          {getHistory()}
+
+        </div>
+        <Button
+            className="history-button"
+            onClick={() =>{
+              localStorage.setItem("history", JSON.stringify({ history: [] }));
+              window.location.reload();
+            }
+            }
+          >
+            Clear history
+          </Button>
+          </div>
       </div>
     </>
   );
+
+  function getHistory() {
+    return JSON.parse(localStorage.getItem("history")).history.map(
+      (item, key) => {
+        return (
+          <div key={key} className="list-item">
+            {key + 1}.{item.playerX} & {item.player0} played.
+            {item.winState === "Draw"
+              ? "Game Draw."
+              : item.winState === "X"
+                ? item.playerX + " Won."
+                : item.player0 + " Won."}
+          </div>
+        );
+      }
+    );
+  }
 
   function getWinnerModalBody() {
     if (winner === "Draw") {

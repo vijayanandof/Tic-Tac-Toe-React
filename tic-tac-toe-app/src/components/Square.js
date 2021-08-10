@@ -1,7 +1,7 @@
-function Square(props) {
+function Square({index, state, onClick}) {
   return (
-    <div className="squarebox" onClick={() => props.onClick(props.index)}>
-      { typeof props.state === 'number' ? "" : props.state}
+    <div className="squarebox" onClick={() =>onClick(index)}>
+      { typeof state === 'number' ? "" : state}
     </div>
   );
 }
